@@ -1,7 +1,15 @@
 # file-picker.js
 
-This is Node.js and HTML based minimalist open/save dialog operating on server filesystem.
+This is Node.js and HTML based minimalist open/save dialog operating on server filesystem. The package has no external dependencies.
+
+## screenshot
 
 ![](screenshot.png)
 
-The package has no external dependencies. To test it, run `node main.js` and point browser to localhost:8080.
+## use instructions
+
+To test the package, run `node main.js` and point browser to localhost:8080.
+
+## licensing
+
+Code in this repository is licensed under [MIT license](LICENSE).
