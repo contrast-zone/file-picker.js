@@ -1,6 +1,6 @@
 # file-picker.js
 
-This is Node.js and HTML based open/save dialog operating on local filesystem.
+This is Node.js and HTML based minimalist open/save dialog operating on server filesystem.
 
 ![](screenshot.png)
 
