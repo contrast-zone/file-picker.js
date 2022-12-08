@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--?xml version="1.0"?-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+    <!--meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"-->
+    <head>
+        <style media="screen">
+            html, body
+            {
+                overflow: hidden;
+                height: 100%;
+                width: 100%;
+                margin-top: 0px;
+                margin-left: 0px;
+                pointer-events: auto;
+                background-color: gray;
+            }
+            
+            .center {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+            }
+        </style>
+    </head>
+    <body>
+        <a onclick="showIO('readDoc', '/default')" href="javascript:void(0)">open</a>
+        &nbsp;
+        <a onclick="showIO('writeDoc', '/default')" href="javascript:void(0)">save</a>
+        <div id="iocontainer" class="center" style="position: absolute; visibility: hidden; left: 0; top: 0; right: 0; bottom: 0; background-color: rgb(128,128,128,0.95);">
+            <iframe id="iofr" style="display: none; border: none;"></iframe>
+        </div>
+        <script>
+            var msg = (event) => {
+                if (event.data.msg === "cancelIO") {
+                    hideIO ();
+                    
+                } else if (event.data.msg === "readFile") {
+                    hideIO ();
+                    setTimeout (() => {alert ("you selected reading from: " + event.data.fname)}, 50);
+
+                } else if (event.data.msg === "writeFile") {
+                    hideIO ();
+                    setTimeout (() => {alert ("you selected writing to: " + event.data.fname)}, 50);
+                }
+            };
+            
+            var showIO = function (mode, url) {
+                var h = document.getElementById("iocontainer");
+
+                document.getElementById("iofr").style.display = "inline";
+                document.getElementById("iofr").style.width = Math.min (640, screen.width) + "px";
+                document.getElementById("iofr").style.height = Math.min (480, screen.height) + "px";
+                
+                document.getElementById("iofr").onload = function () {
+                    h.style.visibility = "visible";
+                    h.style.opacity = 1;
+                }
+
+                if (mode === "readDoc") {
+                    document.getElementById("iofr").contentWindow.location.replace("./src/file-picker.html?mode=" + mode + "&url=" + url);
+
+                } else if (mode === "writeDoc") {
+                    document.getElementById("iofr").contentWindow.location.replace("./src/file-picker.html?mode=" + mode + "&url=" + url);
+
+                }
+            }
+            
+            var hideIO = function () {
+                var h = document.getElementById("iocontainer");
+                h.style.visibility = "hidden";
+                h.style.opacity = 0;
+                document.getElementById("iofr").style.display = "none";
+            }
+
+            window.addEventListener("load", () => {
+                window.addEventListener("message", msg, false);
+            });
+        </script>
+    </body>
+</html>
